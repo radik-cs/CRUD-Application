@@ -1,4 +1,5 @@
 var Userdb = require('../model/model');
+const { use } = require('../routes/router');
 
 // create and save new user
 exports.create = (req,res) =>{
@@ -34,6 +35,13 @@ exports.create = (req,res) =>{
 
 // retrieve and return all users / retrieve and return a single user
 exports.find = (req, res)=>{
+    Userdb.find()
+        .then(user=>{
+            res.send(user)
+        })
+        .catch(err=>{
+            res.status(500).send({message:err.message || "Error Occurred while retrieving user information" })
+        })
 
 }
 
