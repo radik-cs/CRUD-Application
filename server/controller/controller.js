@@ -53,7 +53,7 @@ exports.update = (req, res)=>{
         .send({message:"Data to update can not be empty"})
     }
 
-    const id = rew.params.id;
+    const id = req.params.id;
     Userdb.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
     .then(data=>{
         if(!data){
@@ -72,5 +72,24 @@ exports.update = (req, res)=>{
 
 // Delete a user with specified user id in the request
 exports.delete = (req, res)=>{
+    const id = req.params.id;
+
+    Userdb.findByIdAndDelete(id)
+    .then(data=>{
+        if(!data){
+            res.status(404).send({message:`Cannot Delete with id ${id}. Maybe is is wrong`})
+        }else{
+            res.send({
+                message:"User was deleted successfully!"
+            })
+        }
+    })
+    .catch(err=>{
+        res.status(500).send({
+            message: "Could not delete User with id=" + id
+        });
+    });
+
+
 
 }
