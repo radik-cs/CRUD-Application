@@ -1,5 +1,7 @@
-const { $where } = require("../../server/model/model");
 
 
 
-$where("#add-user")
+
+$("#add_user").submit(function(event){
+    alert("Data Inserted Succesfully");
+})
