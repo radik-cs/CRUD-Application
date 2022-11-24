@@ -19,4 +19,17 @@ $("#update_user").submit(function(event){
     })
 
     console.log(data);
+
+
+    var request = {
+        "url":`https://localhost:3000/api/users/${data.id}`,
+        "method":"PUT",
+        "data": data
+
+    }
+
+    $.ajax(request).done(function(response){
+        alert("Data Updated Successfully!");
+
+    })
 })
